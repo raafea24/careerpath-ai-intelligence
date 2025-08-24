@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { ThemeProvider } from "./components/ThemeContext";
+import { ThemeProvider } from "./providers/ThemeProvider";
 import DarkModeToggle from "./components/DarkModeToggle";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
- import { supabase } from "../supabaseClient";
+import { supabase } from "../supabaseClient";
 import Home from './pages/Home.jsx'
 import Auth from './pages/Auth.jsx'
 import Onboarding from './pages/Onboarding.jsx'
@@ -44,9 +44,9 @@ function AppLayout({ children }) {
 
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-      <header className="py-0.5 px-6 bg-indigo-600 text-white flex justify-between items-center shadow">
-        <img src="/images/logo.png" alt="Career Compass Logo" className="h-24 max-h-full" />
-        <nav className="flex gap-4 items-center">
+      <header className="py-0.5 px-4 sm:px-6 bg-indigo-600 text-white flex items-center shadow relative">
+        <img src="/images/logo.png" alt="Career Compass Logo" className="h-20 sm:h-24 max-h-full mr-4" />
+        <nav className="flex-1 flex gap-2 sm:gap-4 items-center">
           <Link to="/" className="hover:underline">Home</Link>
           <Link to="/dashboard" className="hover:underline">Dashboard</Link>
           <Link to="/onboarding" className="hover:underline">Onboarding</Link>
@@ -71,8 +71,10 @@ function AppLayout({ children }) {
               <span>{loggingOut ? "Logging out..." : "Logout"}</span>
             </button>
           )}
+          <div className="ml-auto mr-4">
+            <DarkModeToggle className="relative" />
+          </div>
         </nav>
-        <DarkModeToggle className="ml-4" />
       </header>
       {logoutMsg && (
         <div className="w-full text-center py-2 bg-green-100 text-green-700 font-semibold shadow-inner">{logoutMsg}</div>
@@ -99,6 +101,7 @@ export default function App() {
           </Route>
         </Routes>
       </AppLayout>
+  {/* Only one universal toggle, now in the navbar */}
     </ThemeProvider>
   );
 }

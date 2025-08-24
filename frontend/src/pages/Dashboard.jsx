@@ -1,18 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { useNavigate } from "react-router-dom";
-
- function useDarkMode() {
-  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'));
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDark]);
-  return [isDark, setIsDark];
-}
+import { useTheme } from "../hooks/useTheme";
 
 function ProgressRing({ percentage }) {
   // SVG progress ring for roadmap completion
@@ -59,7 +48,7 @@ function ProgressRing({ percentage }) {
 export default function Dashboard() {
   const [dashboard, setDashboard] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isDark, setIsDark] = useDarkMode();
+  const { theme } = useTheme();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -125,7 +114,7 @@ export default function Dashboard() {
     );
   }
 
-  const { user_id, welcome_message, profile, progress, kanban, gamification, last_updated } = dashboard;
+  const { welcome_message, profile, progress, kanban, gamification, last_updated } = dashboard;
 
 
   // Color helpers for task status
@@ -138,23 +127,10 @@ export default function Dashboard() {
   return (
     <div className={
       `relative py-10 px-2 sm:px-6 min-h-screen transition-colors duration-300 ` +
-      (isDark
+      (theme === 'dark'
         ? 'bg-gradient-to-br from-gray-900 via-gray-950 to-gray-800'
         : 'bg-gradient-to-br from-blue-50 via-white to-purple-50')
     }>
-      {/* Floating Dark Mode Toggle */}
-      <button
-        className="fixed top-6 right-6 z-50 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg rounded-full p-3 hover:scale-110 transition flex items-center justify-center"
-        aria-label="Toggle dark mode"
-        onClick={() => setIsDark((d) => !d)}
-        title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      >
-        {isDark ? (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m8.66-12.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 4.66l-.71-.71M4.05 4.05l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" /></svg>
-        )}
-      </button>
       {/* Welcome Header */}
       <div className="max-w-4xl mx-auto mb-8">
         <div className="rounded-2xl shadow-lg bg-white dark:bg-gray-900 p-8 flex flex-col items-center gap-2 hover:shadow-2xl transition group relative overflow-hidden">
