@@ -254,6 +254,20 @@ export default function Dashboard() {
             </button>
             <div className="text-xs text-gray-400 dark:text-gray-300">When you generate a new roadmap, it will appear here automatically.</div>
           </div>
+          
+          {/* CV Management Panel */}
+          <div className="rounded-2xl bg-white dark:bg-gray-900 shadow-lg p-6 hover:shadow-2xl transition flex flex-col items-center mt-6">
+            <h3 className="text-xl font-bold text-indigo-700 dark:text-indigo-300 mb-2">CV Manager</h3>
+            <p className="text-center text-gray-600 dark:text-gray-300 mb-4">
+              Upload and analyze your CV to automatically update your profile
+            </p>
+            <button
+              onClick={() => navigate('/cv')}
+              className="px-6 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold shadow hover:from-blue-600 hover:to-indigo-600 transition"
+            >
+              Go to CV Manager
+            </button>
+          </div>
         </div>
       </div>
   <div className="text-xs text-gray-400 dark:text-gray-300 text-right mt-8">Last updated: {last_updated}</div>

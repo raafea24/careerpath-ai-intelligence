@@ -7,6 +7,7 @@ import Home from './pages/Home.jsx'
 import Auth from './pages/Auth.jsx'
 import Onboarding from './pages/Onboarding.jsx'
 import Dashboard from './pages/Dashboard.jsx'
+import CVSection from './pages/CVSection.jsx'
 import ProtectedRoute from './components/ProtectedRoute';
 
 function AppLayout({ children }) {
@@ -50,6 +51,7 @@ function AppLayout({ children }) {
           <Link to="/" className="hover:underline">Home</Link>
           <Link to="/dashboard" className="hover:underline">Dashboard</Link>
           <Link to="/onboarding" className="hover:underline">Onboarding</Link>
+          <Link to="/cv" className="hover:underline">CV Manager</Link>
           {!session && <Link to="/login" className="hover:underline">Login</Link>}
           {!session && <Link to="/signup" className="hover:underline">Signup</Link>}
           {session && (
@@ -98,6 +100,7 @@ export default function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/cv" element={<CVSection />} />
           </Route>
         </Routes>
       </AppLayout>
