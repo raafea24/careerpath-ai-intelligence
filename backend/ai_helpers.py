@@ -12,7 +12,7 @@ import json
 load_dotenv()
 
 # Configure Gemini API
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 def get_gemini_model():
     """Get the Gemini model for text generation."""
@@ -85,8 +85,7 @@ async def parse_cv_text(cv_text):
             return parsed_data
         except json.JSONDecodeError as e:
             print(f"Error parsing JSON from Gemini response: {e}")
-            print(f"Raw response: {response.text}")
-            return {"error": "Failed to parse CV data", "raw_response": response.text}
+            return {"error": "Failed to parse CV data"}
     except Exception as e:
         print(f"Error calling Gemini API: {e}")
         

@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+coverage
 *.local
 
 # Editor directories and files
@@ -32,7 +33,21 @@ __pycache__/
 *.pdb
 *.egg-info/
 venv/
+.venv/
 .env
+.env.*
+!.env.example
+
+# Runtime and private user data
+backend/cache/
+backend/test_results/
+backend/sample_cvs/
+backend/uploads/
+uploads/
+.pytest_cache/
+
+# Windows reserved-name artifacts
+nul
 
 # Backend logs
 backend/logs/

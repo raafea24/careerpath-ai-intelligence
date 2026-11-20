@@ -27,6 +27,9 @@ hyperframe==6.1.0
 idna==3.10
 jsonpointer==3.0.0
 lxml==6.0.1
+langchain==0.3.27
+langchain-core==0.3.74
+langgraph==0.6.6
 orjson==3.11.2
 packaging==25.0
 postgrest==1.1.1
